@@ -20,7 +20,9 @@ class ApiController extends Controller{
         //$requestArr = json_encode($request,true);
 //        return (new DefaultController('alert',Yii::$app->modules))->runAction('index');
         $params = array();
-        Yii::$app->runAction('alert/default/index',$params);
+        //Yii::$app->runAction('alert/default/index',$params);
+        $this->redirect(array('alert/default/index','id'=>1));
+        return;
     }
 
 
