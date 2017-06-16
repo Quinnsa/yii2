@@ -18,7 +18,9 @@ class ApiController extends Controller{
 //        return $this->runController();
         //$request = file_get_contents("input://");
         //$requestArr = json_encode($request,true);
-        return (new DefaultController('alert',Yii::$app->modules))->runAction('index');
+//        return (new DefaultController('alert',Yii::$app->modules))->runAction('index');
+        $params = array();
+        Yii::$app->runAction('alert/default/index',$params);
     }
 
 
