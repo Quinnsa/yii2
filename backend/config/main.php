@@ -37,7 +37,24 @@ return [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning','info'],
+                    'categories' => ['api'],
+                    'maxFileSize' => 1024 * 20,
+                    'logFile' => '@runtime/../logs/user'.date('Ymd'),
+                    'logVars' => ['_POST'],
+                    'fileMode' => 0755,
+                    'maxLogFiles' => 100,
+                    'rotateByCopy' => false,
+                    'prefix' => function(){
+                        if(Yii::$app === null){
+                            return '';
+                        }
+                        $request = Yii::$app->getRequest();
+                        $ip = $request instanceof \yii\web\Request ? $request->getUserIP() : '-';
+                        $controller = Yii::$app->controller->id;
+                        $action = Yii::$app->controller->action->id;
+                        return "[$ip][$controller-$action]";
+                    },
                 ],
             ],
         ],
